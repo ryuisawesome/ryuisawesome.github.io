@@ -176,6 +176,82 @@
             font-size: 0.9rem;
         }
         
+        /* Music Player Styles */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(33, 38, 45, 0.9);
+            border-radius: 50px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .music-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .music-btn {
+            background: none;
+            border: none;
+            color: #d1b097;
+            font-size: 20px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .music-btn:hover {
+            background: rgba(209, 176, 151, 0.2);
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .volume-slider {
+            width: 80px;
+            -webkit-appearance: none;
+            height: 4px;
+            border-radius: 2px;
+            background: #4f5963;
+            outline: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #d1b097;
+            cursor: pointer;
+        }
+        
+        .now-playing {
+            font-size: 12px;
+            color: #8b949e;
+            margin-left: 5px;
+            max-width: 120px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
@@ -192,10 +268,34 @@
             .section-title {
                 font-size: 2rem;
             }
+            
+            .music-player {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                border-radius: 15px;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Music Player -->
+    <div class="music-player">
+        <div class="music-controls">
+            <button id="playPauseBtn" class="music-btn">
+                <i class="fas fa-play"></i>
+            </button>
+        </div>
+        <div class="volume-control">
+            <i class="fas fa-volume-up" id="volumeIcon"></i>
+            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.1" value="0.5">
+        </div>
+        <div class="now-playing" id="nowPlaying">
+            Background Music
+        </div>
+    </div>
+    
     <header>
         <div class="container">
             <div class="profile-content">
@@ -245,5 +345,78 @@
             </div>
         </div>
     </footer>
+    
+    <audio id="backgroundMusic" loop>
+        <source src="https://github.com/ryuisawesome/ryuisawesome.github.io/raw/refs/heads/main/Shock%20videos.mp3">
+    </audio>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('backgroundMusic');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const volumeSlider = document.getElementById('volumeSlider');
+            const volumeIcon = document.getElementById('volumeIcon');
+            const nowPlaying = document.getElementById('nowPlaying');
+            
+            audio.volume = volumeSlider.value;
+            
+            playPauseBtn.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play();
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    nowPlaying.textContent = 'Now Playing...';
+                } else {
+                    audio.pause();
+                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    nowPlaying.textContent = 'Paused';
+                }
+            });
+            
+            volumeSlider.addEventListener('input', function() {
+                audio.volume = volumeSlider.value;
+                
+                if (volumeSlider.value == 0) {
+                    volumeIcon.className = 'fas fa-volume-mute';
+                } else if (volumeSlider.value < 0.5) {
+                    volumeIcon.className = 'fas fa-volume-down';
+                } else {
+                    volumeIcon.className = 'fas fa-volume-up';
+                }
+            });
+            
+            volumeIcon.addEventListener('click', function() {
+                if (audio.volume > 0) {
+                    volumeSlider.dataset.previousVolume = audio.volume;
+                    audio.volume = 0;
+                    volumeSlider.value = 0;
+                    volumeIcon.className = 'fas fa-volume-mute';
+                } else {
+                    audio.volume = volumeSlider.dataset.previousVolume || 0.5;
+                    volumeSlider.value = audio.volume;
+                    
+                    if (audio.volume < 0.5) {
+                        volumeIcon.className = 'fas fa-volume-down';
+                    } else {
+                        volumeIcon.className = 'fas fa-volume-up';
+                    }
+                }
+            });
+            
+            document.body.addEventListener('click', function() {
+                if (audio.paused) {
+                    const playPromise = audio.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                            nowPlaying.textContent = 'Now Playing...';
+                        }).catch(error => {
+                            console.log('Autoplay prevented:', error);
+                        });
+                    }
+                }
+            }, { once: true });
+        });
+    </script>
 </body>
 </html>
