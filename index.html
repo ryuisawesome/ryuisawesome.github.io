@@ -17,7 +17,6 @@
             background-color: #0d1117;
             color: #c9d1d9;
             line-height: 1.6;
-            overflow: hidden;
         }
         
         .container {
@@ -85,10 +84,6 @@
             background: rgba(255, 255, 255, 0.2);
         }
         
-        .roblox-icon {
-            /* Custom styling for Roblox icon if needed */
-        }
-        
         section {
             padding: 80px 0;
         }
@@ -141,6 +136,39 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .project-card {
+            background: #161b22;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .project-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #d1b097;
+        }
+        
+        .project-description {
+            font-size: 0.9rem;
+            color: #8b949e;
+        }
+        
         footer {
             background: #0d1117;
             border-top: 1px solid #21262d;
@@ -177,7 +205,6 @@
             font-size: 0.9rem;
         }
         
-        /* Music Player Styles */
         .music-player {
             position: fixed;
             bottom: 20px;
@@ -253,14 +280,13 @@
             text-overflow: ellipsis;
         }
         
-        /* Splash Screen Styles */
         #splash-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #0d1117 0%, #1a2438 100%);
+            background: #d1b097;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -276,17 +302,17 @@
             border: 5px solid rgba(255, 255, 255, 0.1);
             object-fit: cover;
             margin-bottom: 30px;
-            box-shadow: 0 0 50px rgba(209, 176, 151, 0.5);
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
             animation: pulse 2s infinite alternate;
         }
         
         @keyframes pulse {
             from {
-                box-shadow: 0 0 30px rgba(209, 176, 151, 0.5);
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
                 transform: scale(1);
             }
             to {
-                box-shadow: 0 0 60px rgba(209, 176, 151, 0.8);
+                box-shadow: 0 0 60px rgba(255, 255, 255, 0.8);
                 transform: scale(1.05);
             }
         }
@@ -294,8 +320,8 @@
         .enter-button {
             padding: 15px 50px;
             background: transparent;
-            color: #d1b097;
-            border: 2px solid #d1b097;
+            color: white;
+            border: 2px solid white;
             border-radius: 30px;
             font-size: 1.2rem;
             font-weight: 600;
@@ -306,10 +332,10 @@
         }
         
         .enter-button:hover {
-            background: #d1b097;
-            color: #0d1117;
+            background: white;
+            color: #d1b097;
             transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(209, 176, 151, 0.4);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.4);
         }
         
         .enter-button:after {
@@ -345,12 +371,12 @@
             font-size: 4rem;
             color: white;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
         }
         
         .splash-subtitle {
             font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: 40px;
             max-width: 600px;
             text-align: center;
@@ -361,7 +387,7 @@
             width: 40px;
             height: 40px;
             border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top: 4px solid #d1b097;
+            border-top: 4px solid white;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin-top: 30px;
@@ -375,14 +401,14 @@
         .skip-splash {
             position: absolute;
             bottom: 30px;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             font-size: 0.9rem;
             transition: color 0.3s ease;
         }
         
         .skip-splash:hover {
-            color: #d1b097;
+            color: white;
         }
         
         @media (max-width: 768px) {
@@ -427,19 +453,16 @@
     </style>
 </head>
 <body>
-    <!-- Splash Screen -->
     <div id="splash-screen">
         <img src="https://cdn.discordapp.com/avatars/1413290947336212665/3de89b5d7f786c544dcbd6f163580086.png?size=1024" alt="Logo" class="splash-logo">
         <h1 class="splash-title">ryuisawesome</h1>
-        <p class="splash-subtitle">Python Developer & Content Creator sharing free tools with the community</p>
+        <p class="splash-subtitle">Python Developer</p>
         <button class="enter-button">Enter Website</button>
         <div class="splash-loading"></div>
         <a href="#" class="skip-splash">Skip Intro</a>
     </div>
     
-    <!-- Main Website Content (initially hidden) -->
     <div id="main-content" style="display: none;">
-        <!-- Music Player -->
         <div class="music-player">
             <div class="music-controls">
                 <button id="playPauseBtn" class="music-btn">
@@ -466,7 +489,7 @@
                     <div class="social-links">
                         <a href="https://github.com/ryuisawesome" target="_blank"><i class="fab fa-github"></i></a>
                         <a href="https://discord.com/users/1413290947336212665" target="_blank"><i class="fab fa-discord"></i></a>
-                        <a href="https://www.roblox.com/users/8880795146/profile" target="_blank" class="roblox-icon">
+                        <a href="https://www.roblox.com/users/8880795146/profile" target="_blank">
                             <i class="fas fa-gamepad"></i>
                         </a>
                     </div>
@@ -479,14 +502,40 @@
                 <h2 class="section-title">About Me</h2>
                 <div class="about-content">
                     <div class="about-text">
-                        <p>i love sharing knowledge that everyone should know.</p>
-                        <p>hit me up if you ever wanna talk to me for fun i guess!!</p>
+                        <p>i love sharing knowledge that everyone should know!!</p>
+                        <p>hit me up if you ever wanna talk to me for fun I guess!!</p>
                         
                         <div class="skills">
-                            <span class="skill">noobscript (javascript)</span>
+                            <span class="skill">noobscript</span>
                             <span class="skill">python</span>
                             <span class="skill">node</span>
-                            <span class="skill">html/css</span>
+                            <span class="skill">html/cSS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title">My Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3 class="project-title">Discord Bots</h3>
+                            <p class="project-description">mulitple discord bots with commands 4 fun xd</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3 class="project-title">Notifier</h3>
+                            <p class="project-description">Python script that checks if a roblox username is available however fast it can</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3 class="project-title">Python apps</h3>
+                            <p class="project-description">Cool python apps i guess</p>
                         </div>
                     </div>
                 </div>
@@ -497,18 +546,17 @@
             <div class="container">
                 <div class="footer-content">
                     <h2>Contact me if you want xd</h2>
-                    <p>feel free to add</p>
+                    <p>Feel free to add me on Discord or check out my GitHub</p>
                     <a href="https://discord.com/users/1413290947336212665" class="contact-btn">Contact Me</a>
                     
-                    <p class="copyright">2025 ryuisawesome. all lebron rights reserved btw</p>
+                    <p class="copyright">2025 ryuisawesome. All rights reserved.</p>
                 </div>
             </div>
         </footer>
         
-        <!-- Audio Element -->
         <audio id="backgroundMusic" loop>
-            <!-- Replace with your own music file -->
-            <source src="https://github.com/ryuisawesome/ryuisawesome.github.io/raw/refs/heads/main/Shock%20videos.mp3">
+            <!-- Replaced with a working audio source -->
+            <source src="https://github.com/ryuisawesome/ryuisawesome.github.io/raw/refs/heads/main/Shock%20videos.mp3" type="audio/mpeg">
         </audio>
     </div>
     
@@ -519,37 +567,30 @@
             const enterButton = document.querySelector('.enter-button');
             const skipSplash = document.querySelector('.skip-splash');
             
-            // Enter website function
             function enterWebsite() {
-                // Fade out splash screen
                 splashScreen.style.opacity = '0';
                 
-                // Wait for fade out to complete
                 setTimeout(function() {
                     splashScreen.style.display = 'none';
                     mainContent.style.display = 'block';
                     
-                    // Initialize music player after entering
                     initMusicPlayer();
                 }, 1000);
             }
             
-            // Click event for enter button
             enterButton.addEventListener('click', enterWebsite);
             
-            // Click event for skip splash link
             skipSplash.addEventListener('click', function(e) {
                 e.preventDefault();
                 enterWebsite();
             });
             
-            // Auto-enter after 8 seconds
+            // Reduced timeout from 8 seconds to 3 seconds
             setTimeout(function() {
                 enterButton.textContent = "Entering...";
                 enterWebsite();
-            }, 8000);
+            }, 3000);
             
-            // Music player functionality
             function initMusicPlayer() {
                 const audio = document.getElementById('backgroundMusic');
                 const playPauseBtn = document.getElementById('playPauseBtn');
@@ -560,12 +601,18 @@
                 // Set initial volume
                 audio.volume = volumeSlider.value;
                 
-                // Play/Pause functionality
                 playPauseBtn.addEventListener('click', function() {
                     if (audio.paused) {
-                        audio.play();
-                        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                        nowPlaying.textContent = 'Now Playing...';
+                        const playPromise = audio.play();
+                        if (playPromise !== undefined) {
+                            playPromise.then(() => {
+                                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                                nowPlaying.textContent = 'Now Playing...';
+                            }).catch(error => {
+                                console.log('Playback failed:', error);
+                                nowPlaying.textContent = 'Click to play';
+                            });
+                        }
                     } else {
                         audio.pause();
                         playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
@@ -573,11 +620,9 @@
                     }
                 });
                 
-                // Volume control
                 volumeSlider.addEventListener('input', function() {
                     audio.volume = volumeSlider.value;
                     
-                    // Update volume icon
                     if (volumeSlider.value == 0) {
                         volumeIcon.className = 'fas fa-volume-mute';
                     } else if (volumeSlider.value < 0.5) {
@@ -587,16 +632,13 @@
                     }
                 });
                 
-                // Mute when clicking volume icon
                 volumeIcon.addEventListener('click', function() {
                     if (audio.volume > 0) {
-                        // Store current volume before muting
                         volumeSlider.dataset.previousVolume = audio.volume;
                         audio.volume = 0;
                         volumeSlider.value = 0;
                         volumeIcon.className = 'fas fa-volume-mute';
                     } else {
-                        // Restore to previous volume or default to 0.5
                         audio.volume = volumeSlider.dataset.previousVolume || 0.5;
                         volumeSlider.value = audio.volume;
                         
@@ -611,21 +653,19 @@
                 // Try to autoplay with user gesture
                 document.body.addEventListener('click', function() {
                     if (audio.paused) {
-                        // Try to play audio
                         const playPromise = audio.play();
                         
                         if (playPromise !== undefined) {
                             playPromise.then(() => {
-                                // Autoplay started
                                 playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
                                 nowPlaying.textContent = 'Now Playing...';
                             }).catch(error => {
-                                // Autoplay was prevented
                                 console.log('Autoplay prevented:', error);
+                                nowPlaying.textContent = 'Click to play';
                             });
                         }
                     }
-                }, { once: true }); // Only try once
+                }, { once: true });
             }
         });
     </script>
